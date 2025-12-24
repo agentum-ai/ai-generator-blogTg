@@ -1,19 +1,19 @@
-📰 AI Content Generator API
+# 📰 AI Content Generator API
+
 Микросервис для автоматического создания статей в Telegram на основе актуальных новостей, с применением промпт-инжиниринга.
 
-🎯 Задача
+## 🎯 Задача
+
 Авторам контента и SMM-специалистам нужен инструмент, чтобы:
-
-📰 Получать свежие новости по любой теме в реальном времени
-
-🤖 Генерировать контент (заголовок, мета-описание, полную статью) одним запросом
-
-🚀 Масштабировать создание контента без ручной работы
+- 📰 **Получать свежие новости** по любой теме в реальном времени
+- 🤖 **Генерировать контент** (заголовок, мета-описание, полную статью) одним запросом
+- 🚀 **Масштабировать** создание контента без ручной работы
 
 Этот API делает именно это: за одну секунду превращает тему в готовую статью с актуальными примерами.
 
-💡 Как это работает
-text
+## 💡 Как это работает
+
+```
 Тема: "AI in Healthcare"
          ↓
    [Currents API] → Получаем 5 свежих новостей
@@ -25,93 +25,109 @@ text
    [Промпт с примерами] → Генерируем полную статью (1500+ символов)
          ↓
    Результат: готовый контент с актуальными примерами
-🛠 Технический стек
-Компонент	Технология
-Backend	FastAPI (async, production-ready)
-Server	Uvicorn
-AI	OpenAI API (GPT-4o-mini)
-News API	Currents API (real-time news)
-Deployment	Docker-ready (любой облак)
-🚀 Быстрый старт
-Локально
-Установите зависимости:
+```
 
-bash
-pip install -r requirements.txt
-Установите переменные окружения:
+## 🛠 Технический стек
 
-bash
-export OPENAI_API_KEY="sk-..."
-export CURRENTS_API_KEY="cur_..."
-Запустите сервис:
+| Компонент | Технология |
+| :--- | :--- |
+| **Backend** | FastAPI (async, production-ready) |
+| **Server** | Uvicorn |
+| **AI** | OpenAI API (GPT-4o-mini) |
+| **News API** | Currents API (real-time news) |
+| **Deployment** | Docker-ready (любой облак) |
 
-bash
-python app.py
-Сервис запустится на http://localhost:8000
+## 🚀 Быстрый старт
 
-Тестирование API
-bash
+### Локально
+
+1. **Установите зависимости:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Установите переменные окружения:**
+   ```bash
+   export OPENAI_API_KEY="sk-..."
+   export CURRENTS_API_KEY="cur_..."
+   ```
+
+3. **Запустите сервис:**
+   ```bash
+   python app.py
+   ```
+   Сервис запустится на `http://localhost:8000`
+
+### Тестирование API
+
+```bash
 curl -X POST "http://localhost:8000/generate-post" \
   -H "Content-Type: application/json" \
   -d '{"topic": "AI in Healthcare"}'
-Ответ:
+```
 
-json
+**Ответ:**
+```json
 {
   "title": "Революция в здравоохранении: как ИИ спасает жизни",
   "meta_description": "Узнайте, как AI трансформирует диагностику...",
   "post_content": "Медицина стоит на пороге... [1500+ символов]"
 }
-На облачной платформе (Render, Railway)
-Создайте репозиторий на GitHub
+```
 
-Подключите облачный сервис
+### На облачной платформе (Render, Railway)
 
-Добавьте переменные окружения: OPENAI_API_KEY, CURRENTS_API_KEY
+1. Создайте репозиторий на GitHub
+2. Подключите облачный сервис
+3. Добавьте переменные окружения: `OPENAI_API_KEY`, `CURRENTS_API_KEY`
+4. Деплойте!
 
-Деплойте!
+## 📡 API Endpoints
 
-📡 API Endpoints
-Метод	Endpoint	Описание
-POST	/generate-post	Генерирует статью на тему
-GET	/	Проверка состояния сервиса
-GET	/heartbeat	Health check
-⚙️ Request/Response
-Request:
+| Метод | Endpoint | Описание |
+| :--- | :--- | :--- |
+| `POST` | `/generate-post` | Генерирует статью на тему |
+| `GET` | `/` | Проверка состояния сервиса |
+| `GET` | `/heartbeat` | Health check |
 
-json
+## ⚙️ Request/Response
+
+**Request:**
+```json
 {
   "topic": "Квантовые вычисления"
 }
-Response:
+```
 
-json
+**Response:**
+```json
 {
   "title": "string",
   "meta_description": "string",
   "post_content": "string (1500+ символов с примерами из новостей)"
 }
-🔑 Требуемые API ключи
-OpenAI API — получить
+```
 
-Currents API — получить
+## 🔑 Требуемые API ключи
 
-🎓 Что демонстрируется
-✅ Промпт-инжиниринг — структурированные промпты для конкретных результатов
+- **OpenAI API** — [получить](https://platform.openai.com/api-keys)
+- **Currents API** — [получить](https://currentsapi.services/)
 
-✅ API дизайн — RESTful эндпоинты, обработка ошибок
+## 🎓 Что демонстрируется
 
-✅ Интеграции — работа с внешними API (OpenAI, Currents)
+- ✅ **Промпт-инжиниринг** — структурированные промпты для конкретных результатов
+- ✅ **API дизайн** — RESTful эндпоинты, обработка ошибок
+- ✅ **Интеграции** — работа с внешними API (OpenAI, Currents)
+- ✅ **Production-code** — async, error handling, environment variables
+- ✅ **Масштабируемость** — готово к Docker и облачному деплою
 
-✅ Production-code — async, error handling, environment variables
+## 🚨 Лимиты
 
-✅ Масштабируемость — готово к Docker и облачному деплою
+- Currents API имеет free tier с лимитом запросов
+- OpenAI запросы платные (используется GPT-4o-mini для экономии)
 
-🚨 Лимиты
-Currents API имеет free tier с лимитом запросов
+---
 
-OpenAI запросы платные (используется GPT-4o-mini для экономии)
-
-Стек: FastAPI · OpenAI GPT-4o-mini · Currents API · Python 3.9+
+**Стек:** FastAPI · OpenAI GPT-4o-mini · Currents API · Python 3.9+
 
 
